@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* ============================================================
+   NK Portfolio — Global Styles (Tailwind v4)
+   ============================================================ */
+
+@theme {
+  /* Fonts */
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-display: 'Outfit', system-ui, sans-serif;
+
+  /* Ocean palette */
+  --color-ocean-50: oklch(97.8% 0.012 221);
+  --color-ocean-100: oklch(95% 0.028 221);
+  --color-ocean-200: oklch(88% 0.06 221);
+  --color-ocean-300: oklch(79% 0.1 221);
+  --color-ocean-400: oklch(67% 0.14 221);
+  --color-ocean-500: oklch(56% 0.17 221);
+  --color-ocean-600: oklch(46% 0.16 221);
+  --color-ocean-700: oklch(38% 0.14 221);
+  --color-ocean-800: oklch(30% 0.11 221);
+  --color-ocean-900: oklch(22% 0.08 221);
+  --color-ocean-950: oklch(15% 0.06 221);
+
+  /* Seafoam palette */
+  --color-seafoam-50: oklch(97.5% 0.015 168);
+  --color-seafoam-100: oklch(94% 0.035 168);
+  --color-seafoam-200: oklch(87% 0.07 168);
+  --color-seafoam-300: oklch(78% 0.12 168);
+  --color-seafoam-400: oklch(67% 0.16 168);
+  --color-seafoam-500: oklch(57% 0.17 168);
+  --color-seafoam-600: oklch(47% 0.15 168);
+  --color-seafoam-700: oklch(38% 0.12 168);
+  --color-seafoam-800: oklch(30% 0.09 168);
+  --color-seafoam-900: oklch(22% 0.07 168);
+
+  /* Sand/gold palette */
+  --color-sand-50: oklch(98.5% 0.01 90);
+  --color-sand-100: oklch(96% 0.03 90);
+  --color-sand-200: oklch(92% 0.07 90);
+  --color-sand-300: oklch(86% 0.13 90);
+  --color-sand-400: oklch(78% 0.18 90);
+  --color-sand-500: oklch(70% 0.18 90);
+  --color-sand-600: oklch(58% 0.16 90);
+  --color-sand-700: oklch(46% 0.13 90);
+
+  /* Animations */
+  --animate-spin-slow: spin 8s linear infinite;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+/* Keyframes */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.6); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ── Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #0c4a6e;
+  color: #1e293b;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(14, 165, 233, 0.3);
+  color: #0c4a6e;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
+::-webkit-scrollbar-thumb {
+  background: rgba(14, 165, 233, 0.4);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(14, 165, 233, 0.7); }
+
+/* ── Utility classes ── */
+.glass {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.15);
+}
+
+.section-heading {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  color: #0c4a6e;
+  text-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, #38bdf8, #14b8a6, transparent);
+  border-radius: 2px;
+}
+
+.editable-outline {
+  outline: 2px dashed rgba(56, 189, 248, 0.5);
+  outline-offset: 4px;
+  border-radius: 4px;
+  cursor: text;
+  transition: outline-color 0.2s;
+}
+
+.editable-outline:hover,
+.editable-outline:focus {
+  outline-color: rgba(14, 165, 233, 0.85);
+  background: rgba(240, 249, 255, 0.15);
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #7dd3fc 0%,
+    #f0f9ff 40%,
+    #38bdf8 60%,
+    #7dd3fc 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear infinite;
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+.text-glow-sm {
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.font-display {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
